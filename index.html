@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FC BARCELONA KOREA</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header id="navbar">
+    <button id="hamburger-btn" onclick="toggleSidebar()">&#9776;</button> <!-- onclick: 클릭을 했을때, toggleSidebar:꺼지면 키고, 켜지면 꺼라 -->
+    <span class="site-title">FC BARCELONA KOREA</span> <!-- 상단 바 제목 -->
+    <nav>
+      <a href="#">TABLE</a> <!-- 상단 바 버튼 -->
+      <a href="#">STATS</a> <!-- 상단 바 버튼 -->
+      <a href="#">NEWS</a> <!-- 상단 바 버튼 -->
+      <a href="#">SCHEDULE</a> <!-- 상단 바 버튼 -->
+      <a href="#">BLOG</a> <!-- 상단 바 버튼 -->
+    </nav>
+  </header>
+
+  <div id="page-wrapper"> <!-- 사이드바 + 메인 화면(오른쪽) -->
+
+    <aside id="sidebar"> <!-- 사이드바 묶음 -->
+      <div id="sidebar-inner"> <!-- 사이드바 안쪽 칸(덜 꽉차게 예쁘게 보이게) -->
+        <div id="fcb-logo-wrap"> <!-- 바르샤 로고 -->
+          <img id="fcb-logo" src="images/FcBarcelona.png" alt="FC BARCELONA LOGO">
+        </div>
+        
+      </div>
+    </aside>
+    
+    <main id="main">
+      <h1>FC BARCELONA</h1>
+      <div class="hero-title-divider"></div>
+      <p>MES QUE UN CLUB</p>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

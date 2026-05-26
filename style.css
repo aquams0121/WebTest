@@ -1,0 +1,198 @@
+
+* { margin: 0; padding: 0; box-sizing: border-box; } /* 모든 html코드에 적용, 박스 밖 나가지 않게 */
+body { font-family: sans-serif; } /* 기본 폰트 */
+
+/* 내비게이션 바 */
+#navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0; /* 맨 위에 고정 */
+  display: flex; /* 가로 배치 */
+  align-items: center; /* 중앙 정렬 */
+  padding: 0 16px; /* 내부 여백, 위아래 0, 좌우 16 */
+  height: 50px; /* 바 높이 50 */
+  border-bottom: 2px solid #000; /* 상단 바 아래 검은 구분선 */
+  background: #fff; /* 상단 바 배경색 */
+  z-index: 300; /* 레이어 우선순위를 높여 다른 본문이 상단 바 위로 겹쳐 올라오지 못하게 방어 */
+}
+
+/* 햄버거 버튼 - 가장 왼쪽 */
+#hamburger-btn {
+  background: none; /* 버튼의 기본 회색 배경색을 제거하여 투명하게 만듦 */
+  border: none; /* 버튼의 테두리 선을 제거 */
+  padding: 6px 10px; /* 버튼 안쪽 여백을 주어 클릭 편하게 영역을 넓힘, 위아래 6, 좌우 10 */
+  cursor: pointer; /* 올리면 마우스 손가락 모양으로 변경 */
+  font-size: 20px; /* 아이콘 크기 20px */
+  line-height: 1; /* 줄 높이 최소화로 불필요한 공백 제거 */
+  margin-right: 16px; /* 오른쪽에 16px 여백 (사이트 이름과 간격) */
+}
+
+/* 사이트 이름 */
+#navbar .site-title {
+  font-weight: bold;       /* 글씨 두껍게 */
+  font-size: 17px;         /* 글씨 크기 17px */
+  margin-right: 24px;      /* 오른쪽에 24px 여백 (메뉴들과 간격) */
+  white-space: nowrap;     /* 화면이 좁아져도 줄바꿈 없이 한 줄 유지 */
+}
+
+/* 상단 탭 nav - 세로선 구분, 테두리 없음 */
+#navbar nav {
+  display: flex;           /* 메뉴 탭들을 가로로 나란히 배치 */
+}
+
+/* 상단 바 버튼들 */
+#navbar nav a {
+  padding: 0 18px;         /* 메뉴 좌우 여백 18px (클릭 영역 확보) */
+  height: 50px;            /* 상단 바 높이(50px)와 일치 */
+  display: flex;           /* 글자 정렬을 위해 flex 선언 */
+  align-items: center;     /* 메뉴 글자 세로 정중앙 정렬 */
+  border: none;            /* 테두리 없음 */
+  border-left: 1px solid #bbb; /* 메뉴 왼쪽에 연한 회색 세로 구분선 */
+  text-decoration: none;   /* 링크 기본 밑줄 제거 */
+  color: #000;             /* 글자 색상 검은색 */
+  font-size: 14px;         /* 글씨 크기 14px */
+  font-weight: bold;       /* 글씨 두껍게 */
+}
+#navbar nav a:last-child {
+  border-right: 1px solid #bbb; /* 맨 오른쪽 마무리를 위해 우측 세로선 추가 */
+}
+/* 메뉴 마우스 오버 */
+#navbar nav a:hover { 
+ background: #f0f0f0;     /* 마우스 올리면 선택한거처럼 회색으로 */
+}
+
+/* ── [페이지 레이아웃] ── */
+#page-wrapper {
+  display: flex;           /* [사이드바]와 [메인화면]을 가로로 배치 */
+  margin-top: 50px;        /* 상단 바 높이만큼 본문(배경)을 아래로 밀어냄 */
+  height: calc(100vh - 50px); /* 전체 화면 높이에서 상단 바 높이를 뺀 나머지 */
+  overflow: hidden;        /* 이 구역 밖으로 넘치는 내용 자르기 */
+}
+
+/* ── [사이드바] ── */
+#sidebar {
+  width: 0;                /* 평소에는 너비 0으로 숨김 */
+  min-width: 0;            /* 너비 0일 때 튀어나오는 현상 방지 */
+  overflow: hidden;        /* 닫혀있을 때 내부 내용 숨김 */
+  border-right: 0px solid #000; /* 닫혀있을 때 우측 테두리 숨김 */
+  background: #fff;        /* 배경색 흰색 */
+  transition: width 0.25s ease, min-width 0.25s ease, border-right-width 0.1s ease;  /* 열고 닫힐 때 0.25초간 부드럽게 스르륵 움직임 */
+  overflow-y: auto;        /* 내용이 길어지면 사이드바 내부 자체 스크롤 생성 */
+  flex-shrink: 0;          /* 화면이 좁아져도 찌그러지지 않게 방어 */
+  height: 100%;            /* 높이 100% 꽉 채우기 */
+}
+#sidebar.open {
+  width: 280px;            /* 열렸을 때 너비 280px */
+  min-width: 280px;        /* 화면이 줄어도 280px 미만으로 축소 방지 */
+  border-right: 2px solid #000; /* 열렸을 때 우측 2px 검은색 테두리 생성 */
+}
+/* 사이드바 내부 */
+#sidebar-inner {
+  width: 280px;            /* 문이 열고 닫힐 때 내부 내용이 찌그러지지 않게 고정 */
+}
+
+/* 바르셀로나 로고 */
+#fcb-logo-wrap {
+  display: flex;           /* 가로 정렬 */
+  justify-content: center; /* 로고 중앙 정렬 */
+  padding: 16px 0 16px;    /* 안쪽 여백 (위 16, 좌우 0, 아래 16) */
+  border-bottom: 1px solid #ddd; /* 로고 아래쪽 연한 회색 구분선 */
+}
+#fcb-logo {
+  width: 100%;            /* 부모 너비에 맞춤 */
+  max-width: 130px;       /* 최대 가로 크기 130px 제한 */
+  height: auto !important; /* 가로세로 비율 유지 (최우선 적용) */
+  display: block;          /* 독립된 블록 덩어리로 변환 */
+  margin: 0 auto;          /* 좌우 여백 자동 균등 배분 (정중앙 정렬) */
+} /* 여긴 이해 잘 안됨 */
+
+/* BEST11 버튼 */
+/* BEST 11 버튼 */
+#best11-btn {
+  display: block;          /* 단독 줄바꿈 블록으로 변환 */
+  width: calc(100% - 28px); /* 전체 너비에서 좌우 마진(28px)을 제외한 크기 계산 */
+  margin: 14px;            /* 사방 바깥 여백 14px */
+  padding: 10px;           /* 버튼 내부 여백 10px (상하좌우 균등) */
+  font-size: 14px;         /* 글씨 크기 14px */
+  font-weight: bold;       /* 글씨 두껍게 */
+  border: 2px solid #000;  /* 사방 2px 검은색 테두리 */
+  background: none;        /* 배경 투명 */
+  cursor: pointer;         /* 마우스 커서 손가락 모양 */
+}
+/* BEST 11 버튼 마우스 오버 */
+#best11-btn:hover { 
+  background: #eee;        /* 마우스 올리면 배경 연한 회색 */
+}
+
+/* 포지션 섹션 */
+.position-section { 
+  border-top: 2px solid #000; /* 새로운 포지션 시작할 때 상단 검은 구분선 */
+}
+/* 포지션 라벨 제목 */
+.position-label {
+  padding: 7px 14px;       /* 안쪽 여백 (위아래 7px, 좌우 14px) */
+  font-weight: bold;       /* 글씨 두껍게 */
+  font-size: 12px;         /* 글씨 크기 12px */
+  background: #f5f5f5;     /* 라벨 배경 연한 회색 */
+  border-bottom: 1px solid #ccc; /* 라벨 아래쪽 중간 회색 구분선 */
+  letter-spacing: 1px;     /* 글자 자간 1px 넓힘 */
+}
+
+/* 선수 리스트 전체 */
+.player-list { 
+  list-style: none;        /* 리스트 기본 기호(•) 제거 */
+}
+/* 선수 리스트 한 줄 */
+.player-list li {
+  padding: 8px 14px;       /* 줄 간격 여백 (위아래 8px, 좌우 14px) */
+  border-bottom: 1px solid #e8e8e8; /* 선수 간 미세한 밑줄 구분선 */
+  font-size: 13px;         /* 글씨 크기 13px */
+  cursor: pointer;         /* 마우스 커서 손가락 모양(👆) */
+  white-space: nowrap;     /* 사이드바가 닫힐 때 선수 이름 줄바꿈 방지 */
+}
+/* 선수 목록 마우스 오버 */
+.player-list li:hover { 
+  background: #f0f0f0;     /* 마우스 올린 선수 행 배경 회색으로 강조 */
+}
+/* 선수 등번호 */
+.player-num {
+  display: inline-block;   /* 가로 배치를 유지하며 width 속성 허용 */
+  width: 24px;             /* 번호 너비 24px 고정 (뒤의 선수 이름들 시작점 일렬 정렬) */
+  font-weight: bold;       /* 글씨 두껍게 */
+  color: #555;             /* 번호 색상 진한 회색 */
+  font-size: 12px;         /* 번호 크기 12px */
+}
+
+/* ── [메인 콘텐츠 영역] ── */
+#main {
+  flex: 1;                 /* 사이드바 제외한 나머지 우측 공간 통째로 차지 */
+  display: flex;           /* 내부 정렬을 위해 flex 선언 */
+  flex-direction: column;  /* 내부 요소들(H1, P)을 위아래 세로로 배치 */
+  align-items: center;     /* 가로 기준 정중앙 정렬 */
+  justify-content: center;  /* 세로 기준 정중앙 정렬 (결과적으로 화면 찐 가운데) */
+  text-align: center;      /* 텍스트 가운데 정렬 */
+  transition: filter 0.25s ease; /* 어두워지는 효과 발동 시 0.25초간 부드럽게 */
+}
+/* 메인 화면 암전 (사이드바 열렸을 때) */
+#main.dimmed { 
+  filter: brightness(0.45); /* 화면 밝기를 45%로 낮춰 어둡게 만듦 */
+  pointer-events: none;     /* 어두워진 상태에서 마우스 클릭 기능 완전 차단 */
+}
+/* 메인 타이틀 */
+#main h1 {
+  font-size: 60px;         /* 글씨 크기 60px 크게 */
+  font-weight: bold;       /* 글씨 두껍게 */
+  letter-spacing: 4px;     /* 글자 자간 4px 넓혀서 웅장한 느낌 */
+}
+/* 하단 구분선 */
+.hero-title-divider {
+  width: 80px;                    /* 선의 가로 길이 80px */
+  height: 2px;                    /* 선의 세로 두께 2px */
+  background: #000; /* 검은색 */
+  border-radius: 1px;             /* 선 양끝 모서리를 1px만큼 부드럽게 깎음 */
+  margin: 0px 0 8px;              /* 바깥 여백 (위 0, 좌우 0, 아래 8px)으로 하단 요소와 간격 조정 */
+}
+/* 메인 슬로건 */
+#main p {
+  font-size: 13px;         /* 글씨 크기 13px */
+  letter-spacing: 1px;     /* 글자 자간 3px 넓힘 */
+}
